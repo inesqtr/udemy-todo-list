@@ -17,10 +17,8 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-// const url = process.env.MONGOLAB_URI;
-
 //create database
-mongoose.connect("mongodb+srv://admin-ines:test123@cluster0-u6x7q.mongodb.net/todolistDB"
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-u6x7q.mongodb.net/todolistDB`
     , { useNewUrlParser: true, useUnifiedTopology: true });
 
 //create schema
