@@ -17,10 +17,11 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const url = process.env.MONGOLAB_URI;
+// const url = process.env.MONGOLAB_URI;
 
 //create database
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin-ines:test123@cluster0-u6x7q.mongodb.net/todolistDB"
+    , { useNewUrlParser: true, useUnifiedTopology: true });
 
 //create schema
 const itemsSchema = {
