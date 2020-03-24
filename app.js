@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const date = require(__dirname + "/date.js");
 const _ = require("lodash");
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 
 const app = express();
 
@@ -14,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //create database
-mongoose.connect("mongodb+srv://admin-ines:test123@cluster0-u6x7q.mongodb.net/todolistDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //create schema
 const itemsSchema = {
@@ -87,7 +91,6 @@ app.get("/:customListName", function (req, res) {
             }
         }
     })
-
 });
 
 app.post("/", function (req, res) {
@@ -130,11 +133,7 @@ app.post("/delete", function (req, res) {
             }
         })
     }
-
-
-
-
-})
+});
 
 //render about page
 app.get("/about", function (req, res) {
@@ -142,8 +141,13 @@ app.get("/about", function (req, res) {
 });
 
 
+let port = process.env.PORT;
+
+if (port == null || port == "") {
+    port = 3000;
+};
 
 
-app.listen(3000, function () {
-    console.log("Server started on port 3000.");
+app.listen(port, function () {
+    console.log("Server has started successfully.");
 });
