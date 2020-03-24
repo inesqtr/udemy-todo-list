@@ -17,8 +17,10 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+const url = process.env.MONGOLAB_URI;
+
 //create database
-mongoose.connect(process.env.MONGOLAB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useMongoClient: true });
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 //create schema
 const itemsSchema = {
